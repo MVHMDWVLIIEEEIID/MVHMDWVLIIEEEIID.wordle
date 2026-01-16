@@ -1,0 +1,288 @@
+* {
+  font-family: cairo, arial;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  touch-action: manipulation;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: space-around;
+  font-size: 3vh;
+}
+
+.main {
+  flex: 6 1 0;
+  max-height: 100%;
+}
+
+.keyboard {
+  flex: 5 1 0;
+}
+
+.wordle-box {
+  height: 80%;
+  aspect-ratio: 1 / 1;
+}
+
+.js-word-box {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.wordle-row {
+  display: flex;
+  flex-direction: row;
+  border: none;
+}
+
+.tile {
+  height: 6.2vh;
+  aspect-ratio: 1/1;
+  text-align: center;
+  background-color: #f5f5f5;
+  color: #121212;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  outline: none;
+  border: 0.25vh solid #121212;
+  font-size: 3vh;
+  width: 100%;
+  caret-color: transparent;
+}
+
+.tile.grey {
+  background-color: #909090;
+}
+
+.tile.yellow {
+  background-color: #ffd500;
+}
+
+.tile.green {
+  background-color: #00e196;
+}
+
+.tile::selection {
+  background: transparent;
+}
+
+.tile::-moz-selection {
+  background: transparent;
+}
+
+.tile:focus {
+  outline: none;
+  border-color: orange;
+}
+
+.tile:not(.disabled) {
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.6;
+}
+
+.disabled:valid {
+  opacity: 1;
+}
+/* Container for the keyboard */
+.keyboard.center {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.js-keyboard-box {
+  max-width: calc(30vh + 40vw);
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  width: 95%;
+  justify-content: center;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 95%;
+  gap: 0.5vh; /* Space between keys */
+}
+
+.key {
+  /* Use flex: 1 to make keys take equal width */
+  flex: 1;
+  height: 9vh;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 0.8vh;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  min-width: 0; /* Allows keys to shrink smaller than their text */
+  font-size: 3vh;
+  user-select: none;
+}
+
+/* Make Enter and Backspace wider than regular keys */
+.wide-key {
+  flex: 1.5;
+  font-size: 2vh; /* Smaller font to fit long text on mobile */
+}
+
+/* Utility to hide text overflow if a screen is very tiny */
+.key span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.key.green {
+  background-color: #00e196;
+}
+.key.yellow {
+  background-color: #ffd500;
+}
+.key.grey {
+  background-color: #909090;
+}
+
+/* Removes the gray highlight when tapping buttons on mobile */
+button,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* On mobile, we don't want a text cursor */
+@media (pointer: coarse) {
+  .tile {
+    caret-color: transparent;
+    cursor: default;
+  }
+}
+
+i.fa-gear {
+  cursor: pointer;
+}
+
+.popup-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons-container {
+  width: 50%;
+}
+
+.btn {
+  opacity: 1;
+  cursor: pointer;
+  transition: opacity 0.6s;
+  font-size: calc(2vh + 1vw);
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.easy-btn {
+  background-color: #00e196;
+}
+.medium-btn {
+  background-color: #ffd500;
+}
+.hard-btn {
+  background-color: crimson;
+}
+.reset-btn {
+  background-color: gray;
+}
+.restart-btn {
+  background-color: crimson;
+}
+.share-btn {
+  background-color: #3498db;
+}
+
+.popup-title {
+  font-size: calc(2vw + 1.5vh) !important;
+}
+
+.popup-close {
+  height: calc(2vw + 1vh) !important;
+  right: 2% !important;
+  top: calc(-1vw + -0.5vh) !important;
+}
+
+.popup-body {
+  height: 100%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: column;
+}
+
+.streak-display {
+  font-size: calc(2vw + 0.75vh) !important;
+}
+
+.popup-content {
+  min-height: calc(10vh + 20vw) !important;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
